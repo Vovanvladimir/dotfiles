@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=./schemas/WayVes_config_schema.json
+
+audios:
+  - name: audio4
+    pipewire-settings:
+      sample-rate: 2000
+      channels: 1
+      sample-size: 256
+      fragment-size: 512
+      capture-mic: false
+      audio-format: F32_LE
+
+      fft-scale: 6
+      fft-cutOff: 4
+
+    audio-overrides:
+      min-frequency: 5
+      max-frequency: 550
+
+      smooth-settings:
+        adjacent-sample-nums: 20
+        smooth-factor: .12
+        sample-range: .2
+        sample-scale: 2.6
+
+    shaders:
+      - name: angular
+        config-file: angular_bottom.glsl
+        class-name: angular_bottom
+        margin-bottom: -50
+        anchor-left: true
+        anchor-bottom: true
+        layer: Bottom
+        window-width: 1920
+        window-height: 450
+        post-processing:
+          - name: glow
+            passes: 1
+        audio-overrides:
+          min-frequency: 0
+          max-frequency: 1000
+
+          smooth-settings:
+            adjacent-sample-nums: 10
+            smooth-factor: .02
+            sample-range: .9
+            sample-scale: 8
+          gravity-settings:
+            gravity-step: 7.5
+            average-frames: 4
